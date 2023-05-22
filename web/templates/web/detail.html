@@ -1,5 +1,5 @@
 <a href="{% url 'index' %}" class="btn">HOME</a>
 
 {% if data %}
-  {{ data }}
+  {{ data |safe }}
 {% endif %}

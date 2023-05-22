@@ -1,14 +1,27 @@
 from django.shortcuts import render
+from django.views import generic
 from web.utils import fetch_data, process_data
 from web.models import Collection
-from tempfile import TemporaryFile
-import requests
-import json
+import petl
+import logging
+logger = logging.getLogger("root")
 
 SWAPI_BASE_URL="https://swapi.dev/api"
 
-def index(request):
-    return render(request, "web/index.html")
+class IndexView(generic.ListView):
+    model = Collection
+    context_object_name = "collection_list"
+    template_name = "web/index.html"
+
+def detail(request, rows=10):
+    context = {}
+    path = request.GET['path']
+    table = petl.fromcsv(path)
+    sink = petl.MemorySource()
+    petl.head(table, rows).tohtml(sink, encoding="utf-8", lineterminator=' ')
+    context = {"data": sink.getvalue().decode('utf-8') }
+
+    return render(request, "web/detail.html", context=context)
 
 def fetch(request):
     resource = "people"

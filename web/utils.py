@@ -6,6 +6,7 @@ from functools import lru_cache
 logger = logging.getLogger("root")
 
 def fetch_data(url):
+    """Yield paginated data from api."""
     if url is None:
         return
     resp = requests.get(url)
@@ -15,11 +16,13 @@ def fetch_data(url):
 
 @lru_cache(maxsize=200)
 def map_planet(url):
+    """Map homeworld url to planet name."""
     res = requests.get(url)
     data = json.loads(res.content)
     return data["name"]
 
 def process_data(data):
+    """Clean fetched data."""
     key_mapping = {
         "name": lambda k, d: d[k],
         "birth_year": lambda k, d: d[k],

@@ -1,7 +1,5 @@
-<p><a href="{% url 'fetch' %}">Fetch Data</a></p>
-{% if data %}
-{{ data }}
-{% for k, v in data.items %}
-<p><a href="{% url 'api' path=k %}">{{ k }}</a>: {{ v }}</p>
+<p><b>COLECTIONS</b> <a href="{% url 'fetch' %}">Fetch Data</a></p>
+<ul>
+{% for collection in collection_list %}
+<li><a href="/detail?path={{ collection.filename }}">{{ collection.created_at }}</a></li>
 {% endfor %}
-{% endif %}
