@@ -1,5 +1,7 @@
+<p><a href="{% url 'fetch' %}">Fetch Data</a></p>
 {% if data %}
+{{ data }}
 {% for k, v in data.items %}
-<p><a href="{% url 'api' path=k %}">{{ k }}</a></p>
+<p><a href="{% url 'api' path=k %}">{{ k }}</a>: {{ v }}</p>
 {% endfor %}
 {% endif %}
