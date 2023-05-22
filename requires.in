@@ -1,0 +1,3 @@
+django~=3.2
+petl~=1.7
+requests~=2.27

@@ -1,0 +1,5 @@
+{% if data %}
+{% for k, v in data.items %}
+<p><a href="{% url 'api' path=k %}">{{ k }}</a></p>
+{% endfor %}
+{% endif %}
