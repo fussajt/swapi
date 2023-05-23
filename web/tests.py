@@ -3,7 +3,7 @@ import json
 from django.urls import reverse
 
 from web.models import Collection
-from web.utils import map_planet, process_data
+from web.utils import map_planet, process_data, map_date
 from web.views import SWAPI_BASE_URL
 
 
@@ -40,3 +40,8 @@ def test_cache(requests_mock):
     ]
     process_data(data)
     assert map_planet.cache_info().hits == 2
+
+def test_date_parser():
+    """Test if edited date is parsed properly."""
+    iso_date = "2014-12-10T16:44:31.486000Z"
+    assert map_date(iso_date) == "2014-12-10"

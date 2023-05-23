@@ -4,6 +4,8 @@ STAR WARS API EXPLORER
 Project overview:
 - Django project settings are placed in `swapi` folder.
 - Web application logic is placed in `web` folder.
+- To install dependencies run: `pip install -r requirements.txt`
+- To install dev dependencies run: `pip install -r requirements_dev.txt`
 - Tests are run by pytest. To execute type: `pytest`
 - To run the application on local machine in development mode type: `./manage.py runserver`
 

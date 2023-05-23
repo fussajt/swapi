@@ -1,3 +1,4 @@
+import dateutil.parser
 import json
 from functools import lru_cache
 
@@ -20,6 +21,11 @@ def map_planet(url):
     data = json.loads(res.content)
     return data["name"]
 
+def map_date(value):
+    """Retrun date from edited date."""
+    return dateutil.parser.isoparse(value).strftime("%Y-%m-%d")
+    
+
 def process_data(data):
     """Clean fetched data."""
     default = lambda k, d: d[k]
@@ -29,7 +35,8 @@ def process_data(data):
         "eye_color": default,
         "skin_color": default,
         "gender": default,
-        "homeworld": lambda k, d: map_planet(d[k])
+        "homeworld": lambda k, d: map_planet(d[k]),
+        "date": lambda k, d: map_date(d['edited'])
     }
     return [{k: key_mapping[k](k, d) 
              for k in d if k in key_mapping.keys()
