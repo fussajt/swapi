@@ -29,15 +29,19 @@ def map_date(value):
 def process_data(data):
     """Clean fetched data."""
     default = lambda k, d: d[k]
-    key_mapping = {
+    value_mapping = {
         "name": default,
         "birth_year": default,
         "eye_color": default,
         "skin_color": default,
         "gender": default,
         "homeworld": lambda k, d: map_planet(d[k]),
-        "date": lambda k, d: map_date(d['edited'])
+        "edited": lambda k, d: map_date(d[k])
     }
-    return [{k: key_mapping[k](k, d) 
-             for k in d if k in key_mapping.keys()
+    key_map = {
+        "edited": "date"
+    }
+    map_key = lambda k: key_map.get(k, k)
+    return [{map_key(k): value_mapping[k](k, d) 
+             for k in d if k in value_mapping.keys()
             } for d in data]

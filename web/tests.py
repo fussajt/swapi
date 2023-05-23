@@ -23,7 +23,6 @@ def test_fetch(db, client, requests_mock):
     assert response.url == "/"
     assert Collection.objects.all().count() == 1
 
-
 def test_cache(requests_mock):
     """Test if calls to plantes resource is cached."""
     url_one = "https://swapi.dev/api/planets/1/"
@@ -45,3 +44,12 @@ def test_date_parser():
     """Test if edited date is parsed properly."""
     iso_date = "2014-12-10T16:44:31.486000Z"
     assert map_date(iso_date) == "2014-12-10"
+
+def test_key_mapping():
+    """Test if edited key is mapped to date key."""
+    input = [
+        {"edited":  "2014-12-10T16:44:31.486000Z"}
+    ]
+    output = process_data(input)
+    assert "date" in output[0]
+    assert output[0]["date"] == "2014-12-10"
