@@ -1,9 +1,10 @@
-from django.db import models
 import csv
-from django.core.files import File
-from django.conf import settings
-from datetime import datetime
 import os
+from datetime import datetime
+
+from django.conf import settings
+from django.core.files import File
+from django.db import models
 
 
 class Collection(models.Model):

@@ -1,6 +1,8 @@
 import json
-import requests
 from functools import lru_cache
+
+import requests
+
 
 def fetch_data(url):
     """Yield paginated data from api."""

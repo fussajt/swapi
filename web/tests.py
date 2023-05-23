@@ -1,9 +1,10 @@
 import json
-from web.views import SWAPI_BASE_URL
-from web.models import Collection
 
 from django.urls import reverse
+
+from web.models import Collection
 from web.utils import map_planet, process_data
+from web.views import SWAPI_BASE_URL
 
 
 def test_fetch(db, client, requests_mock):

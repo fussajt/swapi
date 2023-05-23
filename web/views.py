@@ -1,10 +1,11 @@
-from django.http import HttpResponseRedirect
-from django.urls import reverse
-from django.shortcuts import render
-from django.views import generic
-from web.utils import fetch_data, process_data
-from web.models import Collection
 import petl
+from django.http import HttpResponseRedirect
+from django.shortcuts import render
+from django.urls import reverse
+from django.views import generic
+
+from web.models import Collection
+from web.utils import fetch_data, process_data
 
 SWAPI_BASE_URL="https://swapi.dev/api"
 
