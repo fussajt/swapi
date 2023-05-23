@@ -1,9 +1,6 @@
 import json
 import requests
-import logging
 from functools import lru_cache
-
-logger = logging.getLogger("root")
 
 def fetch_data(url):
     """Yield paginated data from api."""
@@ -23,9 +20,13 @@ def map_planet(url):
 
 def process_data(data):
     """Clean fetched data."""
+    default = lambda k, d: d[k]
     key_mapping = {
-        "name": lambda k, d: d[k],
-        "birth_year": lambda k, d: d[k],
+        "name": default,
+        "birth_year": default,
+        "eye_color": default,
+        "skin_color": default,
+        "gender": default,
         "homeworld": lambda k, d: map_planet(d[k])
     }
     return [{k: key_mapping[k](k, d) 

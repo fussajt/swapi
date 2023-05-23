@@ -1,5 +1,45 @@
-<a href="{% url 'index' %}" class="btn">HOME</a>
+{% extends "web/base.html" %}
 
-{% if data %}
-  {{ data |safe }}
-{% endif %}
+{% block content %}
+<div class="row">
+  <p><a href="{% url 'index' %}" class="btn btn-default">HOME</a></p>
+</div>
+
+<div class="row">
+  <p>
+  <form action="{% url 'count' %}" method="post" class="form-inline">
+      {% csrf_token %}
+      <input name="path" type="hidden" value="{{ path }}">
+      {% for header in header_list %}
+        <div class="checkbox">
+          <label>
+            <input name="header" value="{{ header }}" type="checkbox">{{ header }}
+          </label>
+        </div>
+      {% endfor %}
+        <button type="submit" class="btn btn-default">Count</button>
+    </form>
+  </p>
+</div>
+
+<div class="row">
+  <p>
+  {% if data %}
+    {{ data |safe }}
+  {% endif %}
+  </p>
+</div>
+
+<div class="row">
+  <p><a class="btn btn-primary" href="/detail?path={{ path }}&rows={{ rows|add:10 }}">Load more</a></p>
+</div>
+{% endblock %}
+
+{% block script %}
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+<script>
+  $(document).ready(function() {
+    $('table.petl').addClass('table table-striped');
+  });
+</script>
+{% endblock %}

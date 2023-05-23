@@ -1,5 +1,14 @@
-<p><b>COLECTIONS</b> <a href="{% url 'fetch' %}">Fetch Data</a></p>
-<ul>
-{% for collection in collection_list %}
-<li><a href="/detail?path={{ collection.filename }}">{{ collection.created_at }}</a></li>
-{% endfor %}
+{% extends "web/base.html" %}
+
+{% block content %}
+<h1>STAR WARS' PEOPLE COLLECTION</h1>
+<div class="row">
+  <ul>
+  {% for collection in collection_list %}
+    <li><a class="btn btn-default" href="/detail?path={{ collection.filename }}">{{ collection.created_at }}</a></li>
+  {% endfor %}
+</div>
+<div class="row">
+  <p><a class="btn btn-success" href="{% url 'fetch' %}">Fetch Latest Data</a></p>
+</div>
+{% endblock %}

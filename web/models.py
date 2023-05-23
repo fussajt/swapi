@@ -1,12 +1,9 @@
 from django.db import models
 import csv
-import logging
 from django.core.files import File
 from django.conf import settings
 from datetime import datetime
 import os
-
-logger = logging.getLogger("root")
 
 
 class Collection(models.Model):
@@ -22,7 +19,6 @@ class Collection(models.Model):
 
     def write_file(self, data, path):
         """Write data set under provided path."""
-        logger.info(data)
         write_header = not os.path.exists(path)
         with open(path, "a", newline='') as f:
             csvwriter = csv.DictWriter(
