@@ -3,5 +3,4 @@ django-debug-toolbar
 pytest-django
 requests-mock
 isort
-pylint
 pyflakes
